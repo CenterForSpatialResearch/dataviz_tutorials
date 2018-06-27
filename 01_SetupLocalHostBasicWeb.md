@@ -162,10 +162,10 @@ Note that both the `class` and the `id` designations happen inside the opening `
 #### Website structure and organization
 There is no perfect way to structure your website files but it's always good to keep things organized. The following is how I usually structure my projects:
 * **`index.html`** - this is the main html file, the first one that a browser will read automatically. Usually, this is the main landing page on a site.
-* **`styles`/** (folder)
-  * style.css - this is the main css file that will style the site
-* **`scripts`/** (folder) - here is where you put your javascript files and libraries
-* **`images`/** (folder) - here is where you can put your image files
+* **`styles`** (folder)
+  * **`style.css`** - this is the main css file that will style the site
+* **`scripts`** (folder) - here is where you put your javascript files and libraries
+* **`images`** (folder) - here is where you can put your image files
 
 More information about this can be found at the Mozilla Developer Network [web docs](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/Dealing_with_files).
 
@@ -210,7 +210,7 @@ The following is a short example of an `index.html` file for the landing page of
 ```
 
 #### style.css
-Finally, bellow is the `style.css` file that will style the `index.html` file.
+Finally, bellow is the `style.css` file that will style the `index.html` file above.
 ```css
 body {
   font-family: 'Roboto', sans-serif;
