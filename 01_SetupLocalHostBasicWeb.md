@@ -111,3 +111,47 @@ Here's a more detailed explanation of some of the most common elements:
     * `<u></u>`: represents underlined text.
     * `<img src="locationOfImageFile.extension">`: contains an image element.
     * `<footer></footer>`: contains the footer information for the page.
+There are many more elements. For a full list see the [HTML element reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element) guide by Mozilla Developer Network.
+
+## CSS
+CSS or Cascading Style Sheets is the other main language of the web. This one, though, doesn't really hold any of the content but tells the browser how to **style** the content located in the html file. By style we mean color, font family, font size, background color, letter spacing, etc.
+
+For example, if you want to style all `<p></p>` elements you should add the following lines to your css file:
+```css
+p{
+    color: #000000;
+    font-family: "futura-pt", helvetica, sans-serif;
+    font-size: 1.35em;
+    font-weight: 300;
+    max-width: 900px;
+}
+```
+Here, we are setting the color of the text, the font family, the font weight, and the maximum width of the paragraphs.
+
+In addition to modifying the style of all elements of a specific type, css can also affect a subset of elements or even individual ones through the use of classes or ids:
+* A `class` is a custom designation for a group of elements. For example, if you have a series of paragraphs that require special formatting, but you don't want to affect all paragraphs, you can add a `class` to those paragraphs in your html file and style them in the css file.
+* An `id` is usually reserved for one single element. Again, you add the `id` in the html file and then style it in the css.
+Here's an example with three different paragraphs, each one of them style differently:
+* Here's the html code:
+```html
+<p>This is the generic text element with the default styling.</p>
+<p class="boldText">This is one element we will style with BOLD text.</p>
+<p id="italicsText">This is the other element we will style with ITALICS text.</p>
+```
+* And here's the css code:
+```css
+p{
+  color: #000000;
+  font-family: "futura-pt", helvetica, sans-serif;
+  font-size: 1.35em;
+  font-weight: 300;
+  max-width: 900px;
+}
+p.boldText {
+  font-weight: bold;
+}
+p#italicsText {
+  font-style: italic;
+}
+```
+Note that both the `class` and the `id` designations happen inside the opening `<p>` tag. Also note how you signal a `class` or an `id` in the css: the `class` is called with a `.` and the `id` is called with a `#` mark.
