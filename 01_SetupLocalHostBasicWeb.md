@@ -58,7 +58,7 @@ A third way of running a localhost on your computer is through the **Web Server 
 ## HTML
 HTML or Hypertext Markup Language is the main language of the web. This is the language that your browser will interpret in order to correctly display the content of a website.
 
-HTML works through different elements, identified with opening and closing tags, that let your browser know how to display them. For example, if you want to display a title with the text "Data Visualization Website" you will write it like this in HTML: `<h1>Data Visualization Website</h1>`. Note the `<h1>` tag, which tells the browser display the following content as a title, and the `</h1>` tag, which tells the browser where the title ends.
+HTML works through different elements, identified with opening and closing tags, that let your browser know how to display them. For example, if you want to display a heading with the text "Data Visualization Website" you will write it like this in HTML: `<h1>Data Visualization Website</h1>`. Note the `<h1>` tag, which tells the browser display the following content as a heading, and the `</h1>` tag, which tells the browser where the heading ends.
 
 Similarly, if you were going to display a simple paragraph with the text "Lorem ipsum dolor sit amet, consectetur adipiscing elit." you would write it like this: `<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>`. Just like in the title example, there is an opening `<p>` tag and a closing `</p>` tag.
 
@@ -83,31 +83,31 @@ Here's a very basic example of an HTML file:
 Note that there is one tag at the beginning that tells the browser this is an html document and one overall `<html></html>` element that holds everything else. There is also the `<head></head>` element that holds all the metadata and the `<body></body>` element that holds the content.
 
 Here's a more detailed explanation of some of the most common elements:
-* <!DOCTYPE html>: this defines the document as HTML
-* <html>: marks the start or end (</html>) of the HTML document
-* <head></head>: contains the "meta" information about the document. Some of the information that can go here is:
-    * <title>: Title of the page, also what you see in the tab in your browser.
+* `<!DOCTYPE html>`: this defines the document as HTML
+* `<html>`: marks the start or end (</html>) of the HTML document
+* `<head></head>`: contains the "meta" information about the document. Some of the information that can go here is:
+    * `<title>`: Title of the page, also what you see in the tab in your browser.
     * Meta elements: Don't really do much to the content but are used by search engines to catalogue information about the page.
-        * <meta charset="utf-8">: specifies the character encoding for the page, in this case "utf-8".
-        * <meta name="description" content="description of the site">: contains a description of the site.
-        * <meta name="keywords" content="keywords for the site">: contains the keywords for the site.
-        * <meta name="author" content="author name">: contains the name(s) of the author(s) of the site.
+        * `<meta charset="utf-8">`: specifies the character encoding for the page, in this case "utf-8".
+        * `<meta name="description" content="description of the site">`: contains a description of the site.
+        * `<meta name="keywords" content="keywords for the site">`: contains the keywords for the site.
+        * `<meta name="author" content="author name">`: contains the name(s) of the author(s) of the site.
     * Link elements: Here you will specify the location of the files that you will be referencing, for example, the .css files that contain the styling for the site.
-        * <link rel="stylesheet" type="text/css" href="css/style.css">: contains a link to the style.css file.
+        * `<link rel="stylesheet" type="text/css" href="css/style.css">`: contains a link to the style.css file.
     * Style elements: contains style information for the document or for a part of the document.
     * Script elements: here you specify other files, sites or actual code that contain scripts that you will be using in this page. For example, if you are using Google fonts or Adobe Typekit fonts, you will specify this here. Or if you are using Google Analytics you will also add the script here.
-* <body></body>: In between these two elements you will find all the content of the page. In the <body> you will find some or all of the following elements:
-    * <div></div>: a generic container. It is useful for styling purposes (using the class or id attributes).
-    * <nav></nav>: contains the navigation information for the page. This can be a "nav-bar" at the top of the page that links the different pages of the website.
-    * <h1></h1>, <h2></h2>, <h3></h3>, etc: Headings, sub-headings and sub-sub-headings.
-    * <p></p>: paragraph elements.
-    * <hr>: represents a break, between sections or topics. Can be styled as a horizontal line.
-    * <ul></ul>: represents an unordered list.
-    * <li></li>: represents an element in a list. Usually found inside <ul> elements.
-    * <a href="linkLocation.html"></a>: defines a hyperlink. This can be a link on the same page or on another page or website. It can be applied to a word, a heading or an image or to other elements on the page.
-    * <b></b>: represents bold text.
-        * <br>: represents a break, for example, between paragraphs in the same <p></p> element.
-    * <i></i>: represent an italic text.
-    * <u></u>: represents underlined text.
-    * <img src="locationOfImageFile.extension">: contains an image element.
-    * <footer></footer>: contains the footer information for the page.
+* `<body></body>`: In between these two elements you will find all the content of the page. In the <body> you will find some or all of the following elements:
+    * `<div></div>`: a generic container. It is useful for styling purposes (using the class or id attributes).
+    * `<nav></nav>`: contains the navigation information for the page. This can be a "nav-bar" at the top of the page that links the different pages of the website.
+    * `<h1></h1>`, `<h2></h2>`, `<h3></h3>`, etc: Headings, sub-headings and sub-sub-headings.
+    * `<p></p>`: paragraph elements.
+    * `<hr>`: represents a break, between sections or topics. Can be styled as a horizontal line.
+    * `<ul></ul>`: represents an unordered list.
+    * `<li></li>`: represents an element in a list. Usually found inside <ul> elements.
+    * `<a href="linkLocation.html"></a>`: defines a hyperlink. This can be a link on the same page or on another page or website. It can be applied to a word, a heading or an image or to other elements on the page.
+    * `<b></b>`: represents bold text.
+        * `<br>`: represents a break, for example, between paragraphs in the same <p></p> element.
+    * `<i></i>`: represent an italic text.
+    * `<u></u>`: represents underlined text.
+    * `<img src="locationOfImageFile.extension">`: contains an image element.
+    * `<footer></footer>`: contains the footer information for the page.
