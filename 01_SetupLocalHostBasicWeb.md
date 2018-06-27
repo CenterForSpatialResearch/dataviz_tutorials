@@ -111,6 +111,7 @@ Here's a more detailed explanation of some of the most common elements:
     * `<u></u>`: represents underlined text.
     * `<img src="locationOfImageFile.extension">`: contains an image element.
     * `<footer></footer>`: contains the footer information for the page.
+
 There are many more elements. For a full list see the [HTML element reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Element) guide by Mozilla Developer Network.
 
 ## CSS
@@ -131,6 +132,7 @@ Here, we are setting the color of the text, the font family, the font weight, an
 In addition to modifying the style of all elements of a specific type, css can also affect a subset of elements or even individual ones through the use of classes or ids:
 * A `class` is a custom designation for a group of elements. For example, if you have a series of paragraphs that require special formatting, but you don't want to affect all paragraphs, you can add a `class` to those paragraphs in your html file and style them in the css file.
 * An `id` is usually reserved for one single element. Again, you add the `id` in the html file and then style it in the css.
+
 Here's an example with three different paragraphs, each one of them style differently:
 * Here's the html code:
 ```html
