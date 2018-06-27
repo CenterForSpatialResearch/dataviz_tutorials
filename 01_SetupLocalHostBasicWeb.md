@@ -84,7 +84,7 @@ Note that there is one tag at the beginning that tells the browser this is an ht
 
 Here's a more detailed explanation of some of the most common elements:
 * `<!DOCTYPE html>`: this defines the document as HTML
-* `<html>`: marks the start or end (</html>) of the HTML document
+* `<html>`: marks the start or end (`</html>`) of the HTML document
 * `<head></head>`: contains the "meta" information about the document. Some of the information that can go here is:
     * `<title>`: Title of the page, also what you see in the tab in your browser.
     * Meta elements: Don't really do much to the content but are used by search engines to catalogue information about the page.
@@ -96,17 +96,17 @@ Here's a more detailed explanation of some of the most common elements:
         * `<link rel="stylesheet" type="text/css" href="css/style.css">`: contains a link to the style.css file.
     * Style elements: contains style information for the document or for a part of the document.
     * Script elements: here you specify other files, sites or actual code that contain scripts that you will be using in this page. For example, if you are using Google fonts or Adobe Typekit fonts, you will specify this here. Or if you are using Google Analytics you will also add the script here.
-* `<body></body>`: In between these two elements you will find all the content of the page. In the <body> you will find some or all of the following elements:
+* `<body></body>`: In between these two elements you will find all the content of the page. In the `<body>` you will find some or all of the following elements:
     * `<div></div>`: a generic container. It is useful for styling purposes (using the class or id attributes).
     * `<nav></nav>`: contains the navigation information for the page. This can be a "nav-bar" at the top of the page that links the different pages of the website.
     * `<h1></h1>`, `<h2></h2>`, `<h3></h3>`, etc: Headings, sub-headings and sub-sub-headings.
     * `<p></p>`: paragraph elements.
     * `<hr>`: represents a break, between sections or topics. Can be styled as a horizontal line.
     * `<ul></ul>`: represents an unordered list.
-    * `<li></li>`: represents an element in a list. Usually found inside <ul> elements.
+    * `<li></li>`: represents an element in a list. Usually found inside `<ul>` elements.
     * `<a href="linkLocation.html"></a>`: defines a hyperlink. This can be a link on the same page or on another page or website. It can be applied to a word, a heading or an image or to other elements on the page.
     * `<b></b>`: represents bold text.
-        * `<br>`: represents a break, for example, between paragraphs in the same <p></p> element.
+    * `<br>`: represents a break, for example, between paragraphs in the same `<p></p>` element.
     * `<i></i>`: represent an italic text.
     * `<u></u>`: represents underlined text.
     * `<img src="locationOfImageFile.extension">`: contains an image element.
