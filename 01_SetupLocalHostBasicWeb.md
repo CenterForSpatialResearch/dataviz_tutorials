@@ -157,3 +157,102 @@ p#italicsText {
 }
 ```
 Note that both the `class` and the `id` designations happen inside the opening `<p>` tag. Also note how you signal a `class` or an `id` in the css: the `class` is called with a `.` and the `id` is called with a `#` mark.
+
+## Putting it all together
+#### Website structure and organization
+There is no perfect way to structure your website files but it's always good to keep things organized. The following is how I usually structure my projects:
+* **`index.html`** - this is the main html file, the first one that a browser will read automatically. Usually, this is the main landing page on a site.
+* **`styles`/** (folder)
+  * style.css - this is the main css file that will style the site
+* **`scripts`/** (folder) - here is where you put your javascript files and libraries
+* **`images`/** (folder) - here is where you can put your image files
+
+More information about this can be found at the Mozilla Developer Network [web docs](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/Dealing_with_files).
+
+#### index.html
+The following is a short example of an `index.html` file for the landing page of a data visualization website. It contains a title, a brief intro, and the links to the projects. I've tried to comment it as much as possible. Below that you will find the `style.css` file that styles the html.
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Tab title -->
+    <title>C4SR Projects</title>
+    <!-- Metadata -->
+    <meta name="author" content="Juan Saldarriaga">
+    <meta name="keywords" content="data visualization, new york, urban planning">
+    <!-- Link to the style css file -->
+    <link rel="stylesheet" type="text/css" href="styles/style.css">
+    <!-- Link to Google Fonts to load the appropriate font -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400" rel="stylesheet">
+  </head>
+  <body>
+    <!-- Div container for the title and subtitle -->
+    <div class="titles">
+      <h1>Center for Spatial Research - Projects</h1>
+      <!-- Subtitle -->
+      <h3>Creating data visualization for architecture, urbanism and the humanities.</h3>
+      <!-- Line element -->
+      <hr>
+    </div>
+    <!-- Div container for the intro and list of projects -->
+    <div class="content">
+      <!-- Paragraph with a specific id to apply custom style -->
+      <p id="intro">The following is a list of data visualization projects we have developed in the past. They all relate urban humanities, under the theme of Conflict Urbanism. Supported by the Andrew W. Mellon Foundation this set of projects interrogates the role of conflict in structuring urban space and experiences.</p>
+      <!-- List of projects with their links -->
+      <ul>
+        <li><p class="project-description"><a href="http://c4sr.columbia.edu/conflict-urbanism-colombia">Conflict Urbanism: Colombia</a> - Over the course of the last thirty years, almost seven million Colombians have been forced to leave their homes and towns and move to safer locations. Thousands more have been victims of sexual violence, threats, land-mine explosions, homicides and massacres. Conflict Urbanism: Colombia maps and visualizes these crimes in hopes of better understanding the patterns and ramifications of the Colombian conflict.</p></li>
+        <li><p class="project-description"><a href="http://c4sr.columbia.edu/urban-language-ecologies/">Conflict Urbanism: Language Ecologies</a> - Conflict Urbanism: Language Ecologies explores the role that language plays in shaping urban space. Language interacts with its environment at multiple scales and with diverse media. As an ecology, language either dominates, or is vulnerable to its host environments. In this way it often makes conflict visible in urban settings.</p></li>
+        <li><p class="project-description"><a href="http://c4sr.columbia.edu/conflict-urbanism-aleppo/">Conflict Urbanism: Aleppo</a> - Conflict Urbanism: Aleppo is a call for inquiry and a call to action. It is an open-source, interactive, data-rich map of the city of Aleppo, at the neighborhood scale. Users can navigate the city, with the aid of high resolution satellite imagery from before and during the current civil war. It is also an invitation to students and other collaborators to record and narrate urban damage in Aleppo — at the cultural, infrastructural, or neighborhood scale — and to present that research in case studies which will be added to the website over time.</p></li>
+      </ul>
+    </div>
+  </body>
+</html>
+```
+
+#### style.css
+Finally, bellow is the `style.css` file that will style the `index.html` file.
+```css
+body {
+  font-family: 'Roboto', sans-serif;
+}
+.titles {
+  margin: auto;
+  max-width: 800px;
+}
+.content {
+  max-width: 800px;
+  margin: auto;
+}
+h1 {
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 5px;
+}
+h3 {
+  font-weight: 300;
+  text-align: center;
+  margin-top: 5px;
+}
+hr {
+  width: 50%;
+  border-top-color: #7F7F7F;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-bottom-color: #ffffff;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+}
+#intro{
+  font-weight: 300;
+}
+.project-description {
+  font-weight: 300;
+}
+.project-description a {
+  color: black;
+  font-weight: 400;
+}
+.project-description a:hover {
+  background-color: #FFFF7F;
+}
+```
