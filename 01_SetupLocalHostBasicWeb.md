@@ -178,6 +178,7 @@ The following is a short example of an `index.html` file for the landing page of
     <!-- Tab title -->
     <title>C4SR Projects</title>
     <!-- Metadata -->
+    <meta charset="utf-8">
     <meta name="author" content="Juan Saldarriaga">
     <meta name="keywords" content="data visualization, new york, urban planning">
     <!-- Link to the style css file -->
