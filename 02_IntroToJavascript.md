@@ -94,4 +94,103 @@ Variables are the bread and butter of programming. These are the elements that w
     ```
   * *Note that the names of the variables don't mean anything. It is useful to name variables in a way you can understand and recognize later on, but apart from some restricted keywords, it doesn't matter how you name variables*.
 
+## Operations between variables
+Obviously you can combine, add, subtract and merge variables. Some of these operations apply generally to numbers and others to strings. However, because of JavaScript's flexibility it is possible to mix and match, sometimes creating unexpected results. Here are some very common operations:
+* **Math**:
+  * `+`, `-`, `*`, and `/`. For example:
+  ```js
+  var x = 24;
+  var y = 6;
+  var z = x / y;
+  console.log(z); // This should print 4
+  ```
+  * Modulus `%`: this operation returns the remainder of the division between two numbers. Like this:
+  ```js
+  var x = 24;
+  var y = 5;
+  var z = x % y;
+  console.log(z); // This should print 4
+  ```
+  * `+=`: this is just a shorthand way of adding to a variable. For example:
+  ```js
+  var x = 2;
+  x += 2; // This means the same as 'x = x + 2'
+  console.log(x); // This should print 4
+  ```
+  * And, for other operations you can use the `Math` library that comes preloaded with JavaScript. For example:
+    * `var x = Math.PI;` - this assigns the value of the constant PI to `x`
+    * `var y = Math.sqrt(2);` = this assigns the value of the square root of 2 to y.
+    * [Here](https://www.w3schools.com/jsref/jsref_obj_math.asp) is a list of other operations included in the `Math` object.
+* **String**: here are some operations you can do using string variables.
+  * You can add string variables like this:
+  ```js
+  var name = 'Juan';
+  var lastName = 'Saldarriaga';
+  var fullName = name + ' ' + lastName;
+  ```
+  * If you want to get a specific character from a string you can do it like this:
+  ```js
+  var name = 'Juan';
+  var initial = name.charAt(0);
+  ```
+  * You can also concatenate or join string variables:
+  ```js
+  var firstName = 'Juan';
+  var completeName = firstName.concat(" Francisco", " Saldarriaga"); // Note the spaces before the first letters
+  console.log(completeName);
+  var myNames = ['Juan', 'Francisco', 'Saldarriaga'];
+  var fullName = myNames.join(' '); // The ' ' is telling the code to join using a space
+  console.log(fullName);
+  ```
+  * If you want to make a string upper or lower case you can do it with the `toUpperCase()` or `toLowerCase()` functions:
+  ```js
+  var firstName = 'juan';
+  console.log(firstName.toUpperCase());
+  var lastName = 'saldarriaga';
+  console.log(lastName.toLowerCase());
+  ```
+  * Finally, you can 'cast' (transform) a number variable into a string with the `toString()` function: `var myString = myNumber.toString()`
+* There are some interesting behaviors when you are operating between variables of different types. For example take a look at this snippet:
+```js
+var x = 25 + "Juan"; // This one transforms the '25' into a string and then joins it with the 'Juan'
+console.log(x);
+var x = 25 + 5 + "Juan"; // This one adds the two numbers before joining them to the string 'Juan'
+console.log(x);
+var x = "Juan" + 25 + 5; // This one just joins the two numbers (without adding them) to the string 'Juan'
+console.log(x);
+```
+
+* **Equality operators**: equality operators ask wether one value is equal, greater or less than another. They also verify is something exists, or if something is not equal to something else. They are crucial when you want your code to verify if a specific condition is met. And they respond with `true` or `false`.
+  * `==` - this one is the most common. It verifies if a value is equal to another. It is very important to note that there are **two** equal signs. One equal sign `=` *assigns* a value to a variable. Two equal signs `==` ask the question: 'is this equal to that?'. For example:
+  ```js
+  var x = 1;
+  var y = 2;
+  console.log(x == y); // This should print 'false'
+  ```
+  * `!=` - not equal:
+  ```js
+  var x = 1;
+  var y = 2;
+  console.log(x != y); // This should print 'true'
+  ```
+  * `>` greater than, `<` less than, `>=` greater or equal than, and `<=` less or equal than.
+* **Logical operators**: These ones allow you to join multiple conditions:
+  * `&&` (and) - for example, if this **AND** that is true, do something else...
+  * `||` (or) - if this **OR** that is true, do something else...
+  * Here's a snippet using logical operators:
+  ```js
+  var x = 1;
+  var y = 3;
+  console.log(x == y && y > 2); // This should print 'false'
+  console.log(x == y || y > 2); // This should print 'true'
+  ```
+
+
+* And [here](https://www.w3schools.com/jsref/jsref_operators.asp) is a more comprehensive list of JavaScript operators.
+
+* loops (for and while)
+* conditionals
+
+## Functions
+
 * Function within an object
