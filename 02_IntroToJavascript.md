@@ -55,23 +55,43 @@ Variables are the bread and butter of programming. These are the elements that w
   * You can also use single quotes to assign a string value to a variable: `var lastName = 'Saldarriaga';`
   * And you can also use single quotes inside double quotes or vice versa: `var statement = "His name is 'Juan'";`
   * Give these lines a try to see how they work and how they print on the console.
-* **Numbers**: these variables hold, of course, numbers, with or without decimals. For example:
+* **Numbers**: these variables hold, of course, numbers, with or without decimals, positive and negative. For example:
   * `var x = 1;`
   * `var y = 3.14;`
   * `var z = -1.41;`
-* **Booleans**: these types of variables only hold one of two values, either `True` or `False`. For example:
+* **Booleans**: these types of variables only hold one of two values: `true` or `false`. For example:
   * `var juan = true;` or `var saldarriaga = false;`
-* **Arrays**: these types of variables contain multiple values, of the same type or of mixed types. For example:
+* **Arrays**: these types of variables contain *multiple* values, of the same type or of mixed types. For example:
   * `var names = ["juan", "francisco", "jose", "felipe"];`
   * `var temperatures = [12, 53, 73, 32];`
   * `var myList = ["juan", 23, "44", 25, "saldarriaga"];`
-  * Or you can also have arrays, within arrays: `var doubleArray = ['Juan', 'Jose', [22, 'Saldarriaga']];`
+  * And you can also have arrays, within arrays: `var doubleArray = ['Juan', 'Jose', [22, 'Saldarriaga']];`
   * The important thing about arrays is that you call a specific value based on its **position** in the array, and you count those positions starting with the number `0` for the first value:
-    * For example, if you wanted to print the first value in that array you would write `console.log(doubleArray[0]);`.
-    * If you wanted to print the first value in the nested array you would write `console.log(doubleArray[2][0]);`. The number `2` calls the value in the third position, which is the other array, and the number `0` calls the first value in that other array.
+    * For example, if you wanted to print the first value in that last array you would write `console.log(doubleArray[0]);`. This should print `juan`.
+    * If you wanted to print the first value in the nested array you would write `console.log(doubleArray[2][0]);`. The number `2` calls the value in the third position, which is the other array, and the number `0` calls the first value in that other array. This should print `22`
     * Try to print different values so you get the hang of this.
-*
+* **Objects**: objects can also hold multiple values or arrays (called `properties`), but in addition to this they can also store functions. The classic example of an object is a car, which has properties - color, brand, number of doors, etc -, but also functions - start, stop, turn, etc. Objects in JavaScript work similarly:
+  * For example: `var car = {brand: 'Volvo', year: 2010, color: "red", sedan: false, gears: ['R', '1', '2', '3', '4', '6']}`.
+  * Note how objects use `{}` and not `[]` like arrays. Although they can hold arrays within them.
+  * Note also how they contain labels (`brand`, `year`, etc). This is how you access the values, not by their position but by their label.
+  * For example, if you wanted to get the `color` of the `car` you would type `car.color` or `car['color']` (both methods work).
+  * Give this a try to get the hang of it.
+  * Also, if you wanted to access a value within an array that's contained in an object you would use both the label and the position. For example if you wanted to get the first item in the list of gears you would do write `car.gears[0]` or `car['gear'][0]`.
+* A couple of other things to note with variables:
+  * You can reassign values to a variable, even if they are from a different type. For example:
+  ```js
+  var name = 'Juan';
+  console.log(name); // This should print Juan
+  var name = 123;
+  console.log(name); // This should print 123
+  ```
+  * **Comments**:
+    * As you can see in that last snippet you can use a double forward-slash (`//`) to create a comment. A comment is a piece of text that the program ignores and is extremely useful to document your code and annotate it. The more you comment your code, the easier it will be for someone else or even for you to understand it later.
+    * You can also create a comment that spans multiple lines with an opening `/*` and a closing `*/`:
+    ```js
+    /*This is a comment
+    that spans multiple lines*/
+    ```
+  * *Note that the names of the variables don't mean anything. It is useful to name variables in a way you can understand and recognize later on, but apart from some restricted keywords, it doesn't matter how you name variables*.
 
-A couple of other things to note with variables:
-* You can reassign values to a variable, even if they are from a different type. For example: **lkfjlksf**
-* *Note that the names of the variables don't mean anything. It is useful to name variables in a way you can understand and recognize later on, but apart from some restricted keywords, it doesn't matter how you name variables*.
+* Function within an object
