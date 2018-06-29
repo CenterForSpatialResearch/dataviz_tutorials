@@ -78,6 +78,16 @@ Variables are the bread and butter of programming. These are the elements that w
   * Give this a try to get the hang of it.
   * Also, if you wanted to access a value within an array that's contained in an object you would use both the label and the position. For example if you wanted to get the first item in the list of gears you would do write `car.gears[0]` or `car['gear'][0]`.
 * A couple of other things to note with variables:
+  * You can figure out what type of variable something is by using the function `typeof()`. For example:
+  ```js
+  var x = 1;
+  console.log(typeof(x)); // This should print 'number'
+  var y = 'Juan';
+  console.log(typeof(y)); // This should print 'string'
+  var z = ['Juan', 'Saldarriaga', 23];
+  console.log(typeof(z)); // This should print 'object'
+  ```
+  The reason the last one prints 'object' and not array is because, as we said above, technically arrays are objects in JavaScript.
   * You can reassign values to a variable, even if they are from a different type. For example:
   ```js
   var name = 'Juan';
@@ -85,14 +95,14 @@ Variables are the bread and butter of programming. These are the elements that w
   var name = 123;
   console.log(name); // This should print 123
   ```
-  * **Comments**:
-    * As you can see in that last snippet you can use a double forward-slash (`//`) to create a comment. A comment is a piece of text that the program ignores and is extremely useful to document your code and annotate it. The more you comment your code, the easier it will be for someone else or even for you to understand it later.
-    * You can also create a comment that spans multiple lines with an opening `/*` and a closing `*/`:
-    ```js
-    /*This is a comment
-    that spans multiple lines*/
-    ```
-  * *Note that the names of the variables don't mean anything. It is useful to name variables in a way you can understand and recognize later on, but apart from some restricted keywords, it doesn't matter how you name variables*.
+* **Comments**:
+  * As you can see in that last snippet you can use a double forward-slash (`//`) to create a comment. A comment is a piece of text that the program ignores and is extremely useful to document your code and annotate it. The more you comment your code, the easier it will be for someone else or even for you to understand it later.
+  * You can also create a comment that spans multiple lines with an opening `/*` and a closing `*/`:
+  ```js
+  /*This is a comment
+  that spans multiple lines*/
+  ```
+* *Note that the names of the variables don't mean anything. It is useful to name variables in a way you can understand and recognize later on, but apart from some restricted keywords, it doesn't matter how you name variables*.
 
 ## Operations between variables
 Obviously you can combine, add, subtract and merge variables. Some of these operations apply generally to numbers and others to strings. However, because of JavaScript's flexibility it is possible to mix and match, sometimes creating unexpected results. Here are some very common operations:
@@ -117,11 +127,17 @@ Obviously you can combine, add, subtract and merge variables. Some of these oper
   x += 2; // This means the same as 'x = x + 2'
   console.log(x); // This should print 4
   ```
+  * `++`: another very important shorthand. This is adding `1` to the variable. For example:
+  ```js
+  var x = 2;
+  x++; // This means the same as 'x = x + 2'
+  console.log(x); // This should print 3
+  ```
   * And, for other operations you can use the `Math` library that comes preloaded with JavaScript. For example:
     * `var x = Math.PI;` - this assigns the value of the constant PI to `x`
     * `var y = Math.sqrt(2);` = this assigns the value of the square root of 2 to y.
     * [Here](https://www.w3schools.com/jsref/jsref_obj_math.asp) is a list of other operations included in the `Math` object.
-* **String**: here are some operations you can do using string variables.
+* **Strings**: here are some operations you can do using string variables.
   * You can add string variables like this:
   ```js
   var name = 'Juan';
@@ -150,6 +166,7 @@ Obviously you can combine, add, subtract and merge variables. Some of these oper
   console.log(lastName.toLowerCase());
   ```
   * Finally, you can 'cast' (transform) a number variable into a string with the `toString()` function: `var myString = myNumber.toString()`
+  * [Here](https://www.w3schools.com/jsref/jsref_obj_string.asp) are some other operations you can do with strings.
 * There are some interesting behaviors when you are operating between variables of different types. For example take a look at this snippet:
 ```js
 var x = 25 + "Juan"; // This one transforms the '25' into a string and then joins it with the 'Juan'
@@ -159,7 +176,6 @@ console.log(x);
 var x = "Juan" + 25 + 5; // This one just joins the two numbers (without adding them) to the string 'Juan'
 console.log(x);
 ```
-
 * **Equality operators**: equality operators ask wether one value is equal, greater or less than another. They also verify is something exists, or if something is not equal to something else. They are crucial when you want your code to verify if a specific condition is met. And they respond with `true` or `false`.
   * `==` - this one is the most common. It verifies if a value is equal to another. It is very important to note that there are **two** equal signs. One equal sign `=` *assigns* a value to a variable. Two equal signs `==` ask the question: 'is this equal to that?'. For example:
   ```js
@@ -184,13 +200,82 @@ console.log(x);
   console.log(x == y && y > 2); // This should print 'false'
   console.log(x == y || y > 2); // This should print 'true'
   ```
-
-
 * And [here](https://www.w3schools.com/jsref/jsref_operators.asp) is a more comprehensive list of JavaScript operators.
 
-* loops (for and while)
-* conditionals
-
 ## Functions
+Functions are the other main element in programming. They are basically a set of instructions for the code to perform certain things. In this tutorial you have already used multiple functions, simple ones, but functions nonetheless. For example, you have used `console.log()` which instructs the browser to print something in the console; or `toUpperCase()` which instructs the browser to capitalize all the letters in a given string.
 
-* Function within an object
+Some functions are prebuilt into JavaScript, like `console.log()` or `typeof()`, but others you can define yourself. Here is how you define and run a function:
+```js
+// Definition
+function myFunction(x1, x2, x3){ // This line contains the name of the function and its inputs (x1, x2, x3)
+  var x4 = x1 * x2 * x3; // Here is the first instruction
+  return x4; // And this is what the function outputs
+}
+// Running
+var result = myFunction(2, 3, 4);
+console.log(result); // This is just to show that the variable result holds what the function returned.
+```
+
+As you can see, this function takes three arguments (`x1`, `x2`, and `x3`), creates a variable (`x4`), and assigns the result of the multiplication of the three inputs to this new variable. Then, it returns that variable (`x4`). This is an extremely simple function, but here you have all the main components.
+
+There are a couple of other very important functions that are prebuilt into JavaScript (and most other programing languages). These are *conditionals* and *loops*:
+* **Conditionals**: Conditionals verify wether or not a condition is met and do something accordingly. They usually take the form 'if this is true, then do that, if this other thing is true instead, do that, else, do this...'. Here's a brief example:
+```js
+if (x > 10) {
+  console.log('Yes, x is greater than 10...');
+  // you can also run another function here or do other stuff...
+}
+else if (x == 10) {
+  console.log('X is actually equal to 10...');
+  // you can also run other functions or do other stuff here...
+  // the 'else if' statement is not always necessary...
+}
+else {
+  console.log('No, x is not greater or equal to 10...');
+  // you can also run another function here or do other stuff...
+  // the 'else' statement is not always necessary...
+}
+```
+* **Loops**: Loops tell the computer to do something *repeatedly* until a specific condition is met. They come in two basic forms, `for` and `while`:
+  * Here is a classic `for` loop:
+  ```js
+  for (var i = 0; i < 10; i++) {
+    console.log(i);
+  }
+  ```
+  This loop does the following:
+    * Creates a new variable (`var i = 0`)
+    * Tells the computer that as long as `i < 10`, do the instructions below (`console.log(i)`) and add `1` to `i` (`i++`).
+  * You can also have loops within loops. For example:
+  ```js
+  for (var i = 0; i < 10; i++){
+    for (var j = 0; j < 10; j++){
+      console.log(i + ' - ' + j);
+    }
+  }
+  ```
+  * Notice how in that last function, for every `i` it ran 10 `j`.
+  * `While` loops are very similar to `for` loops but take on a slightly different form. Here's an example:
+  ```js
+  var i = 0;
+  while (i < 10){
+    console.log(i);
+    i++;
+  }
+  ```
+  * There are some reasons (see [here](https://stackoverflow.com/questions/39969145/while-loops-vs-for-loops-in-javascript) and here](https://stackoverflow.com/questions/18640032/javascript-performance-while-vs-for-loops/29608084)) why you would want to use a `while` loop as opposed to a `for` loop, but in general the `for` loop is much more common.
+* Finally, as we mentioned above, objects can also have *functions* in addition to *properties*. Here's an example that defines an object (with properties and functions) and runs it:
+```js
+// Definition
+var person = {
+  firstName: 'Juan',
+  lastName: 'Saldarriaga',
+  id: 555555555,
+  fullName: function(){
+    return this.firstName + ' ' + this.lastName;
+  }
+}
+// Running
+console.log(person.fullName()); // This should print 'Juan Saldarriaga'
+```

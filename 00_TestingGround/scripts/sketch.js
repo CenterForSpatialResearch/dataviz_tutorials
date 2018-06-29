@@ -1,6 +1,11 @@
-var x = 25 + "Juan";
-console.log(x);
-var x = 25 + 5 + "Juan";
-console.log(x);
-var x = "Juan" + 25 + 5;
-console.log(x);
+// Definition
+var person = {
+  firstName: 'Juan',
+  lastName: 'Saldarriaga',
+  id: 555555555,
+  fullName: function(){
+    return this.firstName + ' ' + this.lastName;
+  }
+}
+// Running
+console.log(person.fullName()); // This should print 'Juan Saldarriaga'
