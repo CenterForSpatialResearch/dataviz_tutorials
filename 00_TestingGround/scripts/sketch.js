@@ -1,11 +1,10 @@
-// Definition
-var person = {
-  firstName: 'Juan',
-  lastName: 'Saldarriaga',
-  id: 555555555,
-  fullName: function(){
-    return this.firstName + ' ' + this.lastName;
-  }
+function setup() {
+  createCanvas(800, 450);
+  background(0);
 }
-// Running
-console.log(person.fullName()); // This should print 'Juan Saldarriaga'
+
+function draw() {
+  background(0);
+  fill(255);
+  ellipse(400, 225, 20, 20);
+}
