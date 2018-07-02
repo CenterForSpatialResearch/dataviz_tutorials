@@ -9,7 +9,7 @@ p5.js is just a JavaScript library, meaning that it adds functions to the langua
 
 This tutorial will show you how to load the p5.js library and how to setup a basic sketch. It will also guide you through the main components of that sketch and will show you how to code a very simple 'bouncing balls' drawing. Something like this:
 
-**Add gif**
+**Add gif** ***************************
 
 ## Basic setup
 Before starting to code our sketch, you need to [download](https://p5js.org/download/) the p5.js library. I recommend downloading the *complete* p5.js library. For this sketch we only need the main `p5.js` file, but for future tutorials you'll need the other components, so you might as well download everything now.
@@ -78,6 +78,31 @@ Finally, the reason why we are drawing the `background` again is because we want
 
 On your screen you should have something like this:
 ![01_OneEllipse.png](https://github.com/CenterForSpatialResearch/dataviz_tutorials/blob/master/00_Images/03_IntroToP5/01_OneEllipse.png)
+
+Now, let's say we want the ellipse to follow the position of the mouse, we can do it using the `mouseX` and `mouseY` system variables. These two variables come pre-built into p5.js and they supply the code the x and y coordinates of the mouse. To use them, change your `draw` function into the following:
+```js
+function draw() {
+  background(0);
+  fill(255);
+  ellipse(mouseX, mouseY, 20, 20);
+}
+```
+The only thing we did was to change the x and y position of the ellipse, and replace it with the `mouseX` and `mouseY` variables. That way the ellipse will always be where your mouse is.
+
+Now to clearly view what the `background()` function is doing in the `draw` function, go ahead and remove it from there. Now it should read like this:
+```js
+function draw() {
+  fill(255);
+  ellipse(mouseX, mouseY, 20, 20);
+}
+```
+
+Remember to reload your webpage to see the changes.
+
+You should have gotten something like this without the `background` function in the `draw` function:
+![02_Trails.png](https://github.com/CenterForSpatialResearch/dataviz_tutorials/blob/master/00_Images/03_IntroToP5/02_Trails.png)
+
+* Loop
 
 
 
