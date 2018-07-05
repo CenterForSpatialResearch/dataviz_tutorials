@@ -2,33 +2,49 @@
 *This tutorial will guide you through how to load data in the form of a .cvs file into a p5.js sketch and how to create a simple scatter plot graph with it. This tutorial was written on July 2018.*
 
 ## Working with data in p5.js
-Of course if your aim is to create interactive data visualizations with p5.js you'll need to learn how to load, work, and visualize existing datasets. This tutorial uses a sample dataset from Citibike to show you how to do this and create a basic scatter plot graph.
+Of course if your aim is to create interactive data visualizations with p5.js you'll need to learn how to load, work, and visualize existing datasets. This tutorial uses a sample dataset from Citibike to show you how to do this and create a basic scatter plot graph. We will begin by loading the dataset and printing it to the console. Next, we will create a simple scatter plot. And finally, we will create subsets of the data and create other graphs.
 
-The data was originally downloaded from the [Citibike system data page](https://www.citibikenyc.com/system-data), and was filtered using Jupyter Notebooks (Python and Pandas). The original downloaded file (Citibike trips for October 2017) contained 1,897,592 records. From here we selected only the trips started on October 10, 2017 (63,589 records) and we kept only the ones where the rider had a year of birth (59,184 records). Finally, a random sample of 5,000 rows was generated.
+## Data
+The data for this tutorial was originally downloaded from the [Citibike system data page](https://www.citibikenyc.com/system-data), and was filtered using Jupyter Notebooks (Python and Pandas). The original downloaded file (Citibike trips for October 2017) contained 1,897,592 records. From here we selected only the trips started on October 10, 2017 (63,589 records) and we kept only the ones where the rider had a year of birth (59,184 records). Finally, a random sample of 5,000 rows was generated.
 
-To follow this tutorial, please download the [dataset](https://raw.githubusercontent.com/CenterForSpatialResearch/dataviz_tutorials/master/00_Data/20171011_SelectedCitibikeTrips_Rnd5000.csv) (right-click and save as "20171011_SelectedCitibikeTrips_Rnd5000.csv").
-
-
-## What is p5.js
-[p5.js](https://p5js.org/) is a great library for creative coding in JavaScript. It is built with the same aim as [Processing](http://processing.org/), which is "to make coding accessible to for artist, designers, educators, and beginners." There are other, more robust and complex data visualization libraries, like [d3.js](https://d3js.org/), and you could say that p5 is not a strict data visualization library, but we have chosen it here because of its flexibility and ease of use. Additionally, since p5.js is not strictly a data visualization library and doesn't come with all the pre-built functions, it invites students to learn and understand the basics before they can move on to more advanced visualizations.
-
-p5.js is just a JavaScript library, meaning that it adds functions to the language. Ultimately, this means that we will write in JavaScript, but we will also be able to access all the functions included in the p5.js library. To learn much more about p5.js head over to their [site](https://p5js.org/), where you will find a longer introduction, as well as tutorials and documentation. In addition, check out Daniel Shiffman's great [video tutorial series](https://www.youtube.com/user/shiffman/playlists?shelf_id=14&view=50&sort=dd) on p5.js.
-
-This tutorial will show you how to load the p5.js library and how to setup a basic sketch. It will also guide you through the main components of that sketch and will show you how to code a very simple 'bouncing balls' drawing. The finla product will be something like this:
-![04_BouncingEllipse.gif](https://github.com/CenterForSpatialResearch/dataviz_tutorials/blob/master/00_Images/03_IntroToP5/04_BouncingEllipse.gif)
+To follow this tutorial, please download the [dataset](https://raw.githubusercontent.com/CenterForSpatialResearch/dataviz_tutorials/master/00_Data/20171011_SelectedCitibikeTrips_Rnd5000.csv) (right-click and save as `20171011_SelectedCitibikeTrips_Rnd5000.csv`).
 
 ## Basic setup
-Before starting to code our sketch, you need to [download](https://p5js.org/download/) the p5.js library. I recommend downloading the *complete* p5.js library. For this sketch we only need the main `p5.js` file, but for future tutorials you'll need the other components, so you might as well download everything now.
-
-Next, setup your website folder and create your basic files. Mine is setup like this:
+Again, before starting to code our sketch you need to have [downloaded](https://p5js.org/download/) the p5.js library. In addition, you need to have your webpage's folder setup. Mine is setup like this:
 * `TestingGround` (folder):
   * `index.html`
   * `scripts` (folder):
     * `sketch.js`
     * `p5` (folder):
       * Unzipped p5 library
+  * `data` (folder):
+    * `20171011_SelectedCitibikeTrips_Rnd5000.csv`
 
-*Make sure you put your p5.js library in the `p5` folder (in the `scripts`) folder, and you unzip it there.*
+*Note that I have put the p5.js library in the `scripts/p5` folders and the downloaded dataset in the `data` folder.*
+
+In the `index.html` you should add the following code:
+```html
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Data & p5.js</title>
+    <meta charset="utf-8">
+    <!-- Google fonts code -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700" rel="stylesheet">
+    <!-- Link to the p5.js library -->
+    <script language="javascript" type="text/javascript" src="scripts/p5/p5.js"></script>
+    <!-- Link to sketch file -->
+    <script language="javascript" type="text/javascript" src="scripts/sketch.js"></script>
+  </head>
+  <body>
+  </body>
+</html>
+```
+
+The only difference with the other `index.html` files that we used in the previous tutorials is that here I'm loading the `Roboto` Google Font. This happens in the line `<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700" rel="stylesheet">` inside the `head` section of the `html` file.
+
+
+-------------
 
 In the `index.html` you should add the following code:
 ```html
