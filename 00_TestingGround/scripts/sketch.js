@@ -21,13 +21,14 @@ function setup(){
   console.log('Setup complete...');
   print(tripTable.getRowCount() + ' rows loaded...');
   print(tripTable.getColumnCount() + ' columns loaded...');
+  console.log(tripTable);
   noLoop();
   // createNewTable();
 }
 
 // ***** Draw function ***** //
 function draw(){
-  
+
 }
 
 // // ***** Create new table function ******* //

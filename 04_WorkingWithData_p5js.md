@@ -27,7 +27,7 @@ In the `index.html` you should add the following code:
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Data & p5.js</title>
+    <title>Data and p5.js</title>
     <meta charset="utf-8">
     <!-- Google fonts code -->
     <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700" rel="stylesheet">
@@ -43,7 +43,50 @@ In the `index.html` you should add the following code:
 
 The only difference with the other `index.html` files that we used in the previous tutorials is that here I'm loading the `Roboto` Google Font. This happens in the line `<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300,400,700" rel="stylesheet">` inside the `head` section of the `html` file.
 
+Once you've setup your folder this way, go ahead and run a localhost and navigate to the appropriate URL on your browser. If you need more information on how to run a localhost you can check out our [previous tutorial](https://github.com/CenterForSpatialResearch/dataviz_tutorials/blob/master/01_SetupLocalHostBasicWeb.md).
 
+## Loading data in p5.js
+It is actually quite easy to load data into a p5.js sketch. You do this through the `loadTable` function, which takes three arguments:
+* The location/name of the file
+* The type of file (`csv` or `tsv`)
+* And whether or not the file has headers.
+
+However, because JavaScript is **asynchronous** - meaning that one line of code can be run even if the previous one hasn't finished - the `loadTable` function should be located inside the `preload` function or should contain a `callback` (we will talk more about `callbacks` in the tutorial about APIs, so I won't go into it here). The `preload` function, like the `setup` and `draw` functions, has special properties. In p5.js, the `preload` function always runs first, before the `setup` function, thus making sure files are loaded before any other functions are called. More information about the `preload` function can be found [here](https://p5js.org/reference/#/p5/preload).
+
+Hence, to load the data, write the following in your `sketch.js` file:
+```js
+// ***** Global variables ***** //
+var tripTable;
+
+// ***** Preload function ***** //
+function preload(){
+  tripTable = loadTable('data/20171011_SelectedCitibikeTrips_Rnd5000.csv', 'csv', 'header');
+  console.log('Done loading table...');
+}
+
+// ***** Setup function ***** //
+function setup(){
+  createCanvas(800, 800);
+  textSize(12);
+  textFont('Roboto');
+  console.log('Setup complete...');
+  print(tripTable.getRowCount() + ' rows loaded...');
+  print(tripTable.getColumnCount() + ' columns loaded...');
+}
+```
+
+Note that I'm doing a couple of things:
+* First, I'm declaring an empty *global* variable `var tripTable;` that will hold the table once it is loaded.
+* Next, there's the `preload` function, where I load the table into the `tripTable` variable.
+* Then, in the `setup` function, I'm setting the font to be `Roboto`, the font that was loaded in the `index.html` (this is unrelated to the loading of the data, but I just wanted to show you how to load a custom font.)
+* Finally, in the `setup` too I'm printing to the `console` the number of rows and columns of the table, just to make sure everything loaded correctly:
+  * Note that I'm using the `print` function and not the `console.log` one. Both of them work fine.
+  * Also note that I'm suing the `getRowCount()` and `getColumnCount()` functions to get the number of rows and the number of columns of the table. These two functions will be very useful once we start looping through the rows and columns of the table.
+* Your `console` should print `5000 rows loaded...` and `16 columns loaded...`
+
+Finally, to see what's inside your table and its actual structure add this line to the end of your `setup` function: `console.log(tripTable);`. And reload your page. You should be able to see the table printed in the `console`. It will be an object, and you will be able to expand its different components and see the headers and individual rows. It's always good practice to print these things to the `console` when you are first loading data, just to make sure that everything is loading fine and your data is there.
+
+## Drawing with data
 -------------
 
 In the `index.html` you should add the following code:
