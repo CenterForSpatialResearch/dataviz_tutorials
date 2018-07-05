@@ -6,7 +6,7 @@ Of course if your aim is to create interactive data visualizations with p5.js yo
 
 The data was originally downloaded from the [Citibike system data page](https://www.citibikenyc.com/system-data), and was filtered using Jupyter Notebooks (Python and Pandas). The original downloaded file (Citibike trips for October 2017) contained 1,897,592 records. From here we selected only the trips started on October 10, 2017 (63,589 records) and we kept only the ones where the rider had a year of birth (59,184 records). Finally, a random sample of 5,000 rows was generated.
 
-To follow this tutorial, please <a href="00_Data/20171011_SelectedCitibikeTrips_Rnd5000.csv" download>download</a> the dataset.
+To follow this tutorial, please <a href="00_Data/20171011_SelectedCitibikeTrips_Rnd5000.csv" download>download="00_Data/20171011_SelectedCitibikeTrips_Rnd5000.csv"</a> the dataset.
 
 
 ## What is p5.js
