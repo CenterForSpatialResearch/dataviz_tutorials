@@ -7,7 +7,8 @@
 
 p5.js is just a JavaScript library, meaning that it adds functions to the language. Ultimately, this means that we will write in JavaScript, but we will also be able to access all the functions included in the p5.js library. To learn much more about p5.js head over to their [site](https://p5js.org/), where you will find a longer introduction, as well as tutorials and documentation. In addition, check out Daniel Shiffman's great [video tutorial series](https://www.youtube.com/user/shiffman/playlists?shelf_id=14&view=50&sort=dd) on p5.js.
 
-This tutorial will show you how to load the p5.js library and how to setup a basic sketch. It will also guide you through the main components of that sketch and will show you how to code a very simple 'bouncing balls' drawing.
+This tutorial will show you how to load the p5.js library and how to setup a basic sketch. It will also guide you through the main components of that sketch and will show you how to code a very simple 'bouncing balls' drawing. The finla product will be something like this:
+![04_BouncingEllipse.gif](https://github.com/CenterForSpatialResearch/dataviz_tutorials/blob/master/00_Images/03_IntroToP5/04_BouncingEllipse.gif)
 
 ## Basic setup
 Before starting to code our sketch, you need to [download](https://p5js.org/download/) the p5.js library. I recommend downloading the *complete* p5.js library. For this sketch we only need the main `p5.js` file, but for future tutorials you'll need the other components, so you might as well download everything now.
