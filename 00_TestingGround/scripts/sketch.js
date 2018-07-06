@@ -70,14 +70,14 @@ function draw(){
     text(round(maxDuration - i * (durationRange / 10)), marginX - 5, marginY + (graphHeight / 10) * i);
   }
   // Plotting the dots
-  // fill(0);
-  // for (var i = 0; i < tripTable.getRowCount(); i++) {
-  //   var thisYear = float(tripTable.getString(i, 'birth year'));
-  //   var thisDuration = float(tripTable.getString(i, 'tripduration'));
-  //   var thisX = map(thisYear, minYears, maxYears, marginX, marginX + graphWidth);
-  //   var thisY = map(thisDuration, minDuration, maxDuration, marginY + graphHeight, marginY);
-  //   ellipse(thisX, thisY, 3, 3);
-  // }
+  fill(0);
+  for (var i = 0; i < tripTable.getRowCount(); i++) {
+    var thisYear = float(tripTable.getString(i, 'birth year'));
+    var thisDuration = float(tripTable.getString(i, 'tripduration'));
+    var thisX = map(thisYear, minYears, maxYears, marginX, marginX + graphWidth);
+    var thisY = map(thisDuration, minDuration, maxDuration, marginY + graphHeight, marginY);
+    ellipse(thisX, thisY, 3, 3);
+  }
 }
 
 // ***** Draw function ***** //
