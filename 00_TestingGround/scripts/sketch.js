@@ -37,6 +37,9 @@ function getMaxValues(){
     minDuration = min(minDuration, float(tripTable.getString(i, 'tripduration')));
   }
   minDuration = 0;
+  maxDuration = 4500;
+  minYears = 1935;
+  maxYears = 2005;
   yearRange = maxYears - minYears;
   durationRange = maxDuration - minDuration;
   print('Max year: ' + str(maxYears));
@@ -53,9 +56,11 @@ function draw(){
   var graphWidth = width - marginX * 2;
   // Draw minor axis lines
   stroke(230);
-  for (var i = 0; i < 10; i++) {
-    line(marginX, marginY + i * (graphHeight / 10), marginX + graphWidth, marginY + i * (graphHeight / 10));
-    line(marginX + (i + 1) * (graphWidth / 10), marginY, marginX + (i + 1) * (graphWidth / 10), marginY + graphHeight);
+  for (var i = 0; i < 9; i++) {
+    line(marginX, marginY + i * (graphHeight / 9), marginX + graphWidth, marginY + i * (graphHeight / 9));
+  }
+  for (var i = 0; i < 7; i++) {
+    line(marginX + (i + 1) * (graphWidth / 7), marginY, marginX + (i + 1) * (graphWidth / 7), marginY + graphHeight);
   }
   // Draw mayor axis lines
   stroke(0);
@@ -63,11 +68,13 @@ function draw(){
   line(marginX, marginY, marginX, height - marginY);
   // Draw labels
   noStroke();
-  for (var i = 0; i < 11; i++) {
+  for (var i = 0; i < 8; i++) {
     textAlign(CENTER, TOP);
-    text(round(minYears + i * (yearRange / 10)), marginX + (graphWidth / 10) * i, marginY + graphHeight + 5);
+    text(round(minYears + i * (yearRange / 7)), marginX + (graphWidth / 7) * i, marginY + graphHeight + 5);
+  }
+  for (var i = 0; i < 10; i++) {
     textAlign(RIGHT, CENTER);
-    text(round(maxDuration - i * (durationRange / 10)), marginX - 5, marginY + (graphHeight / 10) * i);
+    text(round(maxDuration - i * (durationRange / 9)), marginX - 5, marginY + (graphHeight / 9) * i);
   }
   // Plotting the dots
   fill(0);
@@ -79,51 +86,3 @@ function draw(){
     ellipse(thisX, thisY, 3, 3);
   }
 }
-
-// ***** Draw function ***** //
-// function draw(){
-// }
-
-// // ***** Create new table function ******* //
-// function createNewTable(){
-//   topRevenue.addColumn('release_date');
-//   topRevenue.addColumn('vote_average');
-//   for (var i = 0; i < moviesTable.getRowCount(); i++) {
-//     var totalRevenue = moviesTable.getNum(i, 'revenue');
-//     if (totalRevenue >= 100000000) {
-//       var newRow = topRevenue.addRow();
-//       newRow.setString('release_date', moviesTable.getString(i, 'release_date'));
-//       newRow.setNum('vote_average', moviesTable.getNum(i, 'vote_average'));
-//     }
-//   }
-//   print('New top revenue table created...');
-// }
-//
-// function drawMovies(table){
-//   background(255);
-//   fill(0);
-//   for (var i = 0; i < 11; i++) {
-//     noStroke();
-//     textAlign(RIGHT, CENTER);
-//     text(i, textLeft, map(i, 0, 10, bottomY, topY));
-//     stroke(200);
-//     line(textLeft + 10, map(i, 0, 10, bottomY, topY), rightX + 10, map(i, 0, 10, bottomY, topY));
-//   }
-//   noStroke();
-//   for (var i = 0; i < 10; i++) {
-//     textAlign(CENTER, TOP);
-//     text(round(map(i, 0, 9, 1916, 2017)), map(i, 0, 9, leftX, rightX), bottomY + 5);
-//   }
-//   for (var i = 0; i < table.getRowCount(); i++) {
-//     var date = table.getString(i, 'release_date').split('-')[0];
-//     var year = parseInt(date);
-//     var yearPosition = map(year, 1916, 2017, leftX, rightX);
-//     var scorePosition = map(table.getNum(i, 'vote_average'), 0, 10, bottomY, topY);
-//     ellipse(yearPosition, scorePosition, 3, 3);
-//   }
-// }
-//
-// // ***** Draw function ***** //
-// function draw(){
-//   drawMovies(topRevenue);
-// }
