@@ -66,7 +66,7 @@ function preload(){
 
 // ***** Setup function ***** //
 function setup(){
-  createCanvas(800, 800);
+  createCanvas(800, 450);
   textSize(12);
   textFont('Roboto');
   console.log('Setup complete...');
@@ -86,7 +86,176 @@ Note that I'm doing a couple of things:
 
 Finally, to see what's inside your table and its actual structure add this line to the end of your `setup` function: `console.log(tripTable);`. And reload your page. You should be able to see the table printed in the `console`. It will be an object, and you will be able to expand its different components and see the headers and individual rows. It's always good practice to print these things to the `console` when you are first loading data, just to make sure that everything is loading fine and your data is there.
 
-## Drawing with data
+## Understanding the data
+First, before we can actually draw with the data, we need to understand the range of values. To do this I built a separate function that loops through the dataset and gets the maximum values for `birth year` and `tripduration`, the two columns that I will use in the scatter plot. Here's my whole code so far:
+```js
+// ***** Global variables ***** //
+var tripTable;
+var maxYears = 0;
+var minYears = 2000;
+var yearRange;
+var maxDuration = 0;
+var minDuration = 5000;
+var durationRange;
+
+// ***** Preload function ***** //
+function preload(){
+  tripTable = loadTable('data/20171011_SelectedCitibikeTrips_Rnd5000.csv', 'csv', 'header');
+  console.log('Done loading table...');
+}
+
+// ***** Setup function ***** //
+function setup(){
+  createCanvas(800, 450);
+  textSize(12);
+  textFont('Roboto');
+  console.log('Setup complete...');
+  print(tripTable.getRowCount() + ' rows loaded...');
+  print(tripTable.getColumnCount() + ' columns loaded...');
+  console.log(tripTable);
+  getMaxValues();
+  // noLoop(); // ** New
+}
+
+// ***** Get maximum values function ***** //
+function getMaxValues(){
+  for (var i = 0; i < tripTable.getRowCount(); i++) {
+    maxYears = max(maxYears, float(tripTable.getString(i, 'birth year')));
+    minYears = min(minYears, float(tripTable.getString(i, 'birth year')));
+    maxDuration = max(maxDuration, float(tripTable.getString(i, 'tripduration')));
+    minDuration = min(minDuration, float(tripTable.getString(i, 'tripduration')));
+  }
+  yearRange = maxYears - minYears;
+  durationRange = maxDuration - minDuration;
+  print('Max year: ' + str(maxYears));
+  print('Min year: ' + str(minYears));
+  print('Max duration: ' + str(maxDuration));
+  print('Min duration: ' + str(minDuration));
+  print('Year range: ' + str(yearRange));
+  print('Duration range: ' + str(durationRange));
+}
+```
+
+I'm doing the following things here:
+* Declaring six *global* variables at the beginning to hold the maximum and minimum values, and the range between them. I'm setting the maximum to `0` and the minimum to some arbitrary large numbers.
+* Defining the function to get the maximum and minimum values:
+  * This function loops through the values of the table and gets the maximum value between the variable I declared above and the selected value for each row.
+  * Note in those lines how I have to get the values with the `getString()` function. This function gets the values based on two arguments, the row number (`i`) and the column header (`birth year` or `tripduration`).
+  * The values are originally encoded as strings, but then I have to convert them to numbers with decimals with the `float()` function, in order to compare them with the maximum or minimum value with the `max` or `min` functions.
+  * Once I loop through the whole dataset I print values to make sure everything is fine.
+
+You should get on your console `2001` and `1893` as the maximum and minimum years of birth and `21186` and `64` as the maximum and minimum trip duration. These trip duration numbers are coded in seconds, which means that the maximum duration is somewhere around 5 hours and 48 minutes, way over the Citibike limit, but those trips do exist. The minimum year might be an error but we'll deal with that later.
+
+## Setting up the graph
+The next step will be to start drawing the axis and the labels of the graph. To do this, we need to figure out the margins and draw the necessary axis lines and labels. Here is the whole code. I'll go over what I did below.
+```js
+// ***** Global variables ***** //
+var tripTable;
+var maxYears = 0;
+var minYears = 2000;
+var yearRange;
+var maxDuration = 0;
+var minDuration = 5000;
+var durationRange;
+var marginX = 50;
+var marginY = 40;
+
+// ***** Preload function ***** //
+function preload(){
+  tripTable = loadTable('data/20171011_SelectedCitibikeTrips_Rnd5000.csv', 'csv', 'header');
+  console.log('Done loading table...');
+}
+
+// ***** Setup function ***** //
+function setup(){
+  createCanvas(800, 450);
+  textSize(12);
+  textFont('Roboto');
+  console.log('Setup complete...');
+  print(tripTable.getRowCount() + ' rows loaded...');
+  print(tripTable.getColumnCount() + ' columns loaded...');
+  console.log(tripTable);
+  getMaxValues();
+  noLoop(); // ** New
+}
+
+// ***** Get maximum values function ***** //
+function getMaxValues(){
+  for (var i = 0; i < tripTable.getRowCount(); i++) {
+    maxYears = max(maxYears, float(tripTable.getString(i, 'birth year')));
+    minYears = min(minYears, float(tripTable.getString(i, 'birth year')));
+    maxDuration = max(maxDuration, float(tripTable.getString(i, 'tripduration')));
+    minDuration = min(minDuration, float(tripTable.getString(i, 'tripduration')));
+  }
+  minDuration = 0;
+  yearRange = maxYears - minYears;
+  durationRange = maxDuration - minDuration;
+  print('Max year: ' + str(maxYears));
+  print('Min year: ' + str(minYears));
+  print('Max duration: ' + str(maxDuration));
+  print('Min duration: ' + str(minDuration));
+  print('Year range: ' + str(yearRange));
+  print('Duration range: ' + str(durationRange));
+}
+
+function draw(){
+  background(255);
+  var graphHeight = height - marginY * 2;
+  var graphWidth = width - marginX * 2;
+  // Draw minor axis lines
+  stroke(230);
+  for (var i = 0; i < 10; i++) {
+    line(marginX, marginY + i * (graphHeight / 10), marginX + graphWidth, marginY + i * (graphHeight / 10));
+    line(marginX + (i + 1) * (graphWidth / 10), marginY, marginX + (i + 1) * (graphWidth / 10), marginY + graphHeight);
+  }
+  // Draw mayor axis lines
+  stroke(0);
+  line(marginX, height - marginY, width - marginX, height - marginY);
+  line(marginX, marginY, marginX, height - marginY);
+  // Draw labels
+  noStroke();
+  for (var i = 0; i < 11; i++) {
+    textAlign(CENTER, TOP);
+    text(round(minYears + i * (yearRange / 10)), marginX + (graphWidth / 10) * i, marginY + graphHeight + 5);
+    textAlign(RIGHT, CENTER);
+    text(round(maxDuration - i * (durationRange / 10)), marginX - 5, marginY + (graphHeight / 10) * i);
+  }
+}
+```
+* First, I created two more *global* variables to hold the margins (`marginX` and `marginY`). These are very useful when calculating where everything should be drawn.
+* Next, in the `setup` function I added the line `noLoop()`. This makes sure that the draw function will only be drawn once and not 60 frames per second. Since this is going to be a static graph (for now), I don't need everything to be drawn multiple times, just once is enough.
+* Next, in the function where I calculate the maximum and minimum variables, I overwrite the `minDuration` value and set it to `0`. I do this because I want the Y axis to start at `0` and not at `64`.
+* Next, in the `draw` function I do the following:
+  * Based on the margins, I calculate the width and height of the actual graph, not canvas. This will also help me figure out where everything goes on the canvas.
+  * Next, I draw the minor axis lines:
+    * `stroke()` refers to the color (in grayscale) of the lines. Remember, 255 is white and 0 is black.
+    * I draw the lines using the margins and the graph height and width that I calculated before.
+  * Similarly I draw the mayor axis lines.
+  * Finally, I draw the labels:
+    * `textAlign` aligns the text in the horizontal (`LEFT`, `CENTER`, or `RIGHT`) and in the vertical (`TOP`, `CENTER`, or `BOTTOM`) directions. These arguments need to be capitalized.
+    * Here I use the margins, the graph height and width, and the minimum, maximum, and ranges I calculated before. It's a little hard to understand at first view but if you deconstruct it carefully you'll make sense of it.
+
+You should see something like this:
+![01_LabelsAxis.png](https://github.com/CenterForSpatialResearch/dataviz_tutorials/blob/master/00_Images/04_Data/01_LabelsAxis.png)
+
+## Plotting the dots
+Now let's do a first pass at plotting the dots.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 -------------
 
 In the `index.html` you should add the following code:
