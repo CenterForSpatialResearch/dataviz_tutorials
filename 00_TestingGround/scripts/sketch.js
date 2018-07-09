@@ -7,10 +7,13 @@ var maxDuration = 0;
 var minDuration = 5000;
 var durationRange;
 var marginX = 50;
-var marginY = 40;
+var marginY = 55;
 var graphHeight;
 var graphWidth;
 var tripObjects = [];
+var selectedButton = 0;
+var buttonLength = 100;
+var buttonSpacing = 5;
 
 // ***** Preload function ***** //
 function preload(){
@@ -77,7 +80,28 @@ function trip(duration, usertype, yearBirth, gender){
   // Functions
   this.drawEllipse = function() {
     noStroke();
-    fill(0);
+    if (selectedButton == 0){
+      fill(0);
+    }
+    else if (selectedButton == 1) {
+      if (this.gender == '0'){
+        fill(200);
+      }
+      else if (this.gender == '1'){
+        fill(255, 136, 0);
+      }
+      else if (this.gender == '2'){
+        fill(0, 170, 255);
+      }
+    }
+    else if (selectedButton == 2){
+      if (this.usertype == 'Subscriber'){
+        fill(255, 136, 0);
+      }
+      else if (this.usertype == 'Customer'){
+        fill(0, 170, 255);
+      }
+    }
     ellipse(this.positionX, this.positionY, this.ellipseSize, this.ellipseSize);
   }
   this.checkMouse = function() {
@@ -106,8 +130,27 @@ function trip(duration, usertype, yearBirth, gender){
   }
 }
 
+function drawButtons() {
+  var buttonLabels = ['All trips', 'By gender', 'By user type'];
+  for (var i = 0; i < buttonLabels.length; i++) {
+    if (selectedButton == i) {
+      fill(255, 233, 127);
+    }
+    else {
+      fill(230);
+    }
+    noStroke();
+    rect(440 + (buttonLength + buttonSpacing) * i, 20, buttonLength, 20);
+    fill(100);
+    textAlign(CENTER, CENTER);
+    text(buttonLabels[i], 440 + buttonLength / 2 + (buttonLength + buttonSpacing) * i, 30)
+  }
+}
+
 function draw(){
   background(255);
+  drawButtons();
+  drawLegend();
   // Draw minor axis lines
   stroke(230);
   for (var i = 0; i < 9; i++) {
@@ -138,5 +181,40 @@ function draw(){
   // Checking for mouse position to display popup
   for (var i = 0; i < tripObjects.length; i++) {
     tripObjects[i].checkMouse();
+  }
+}
+
+function mousePressed(){
+  if (mouseX > 440 && mouseY > 20 && mouseX < (440 + buttonLength) && mouseY < 40){
+    selectedButton = 0;
+  }
+  if (mouseX > (440 + buttonLength + buttonSpacing) && mouseY > 20 && mouseX < (440 + buttonLength * 2 + buttonSpacing) && mouseY < 40){
+    selectedButton = 1;
+  }
+  if (mouseX > (440 + buttonLength * 2 + buttonSpacing * 2) && mouseY > 20 && mouseX < (440 + buttonLength * 3 + buttonSpacing * 2) && mouseY < 40){
+    selectedButton = 2;
+  }
+}
+
+function drawLegend(){
+  if (selectedButton == 1){
+    fill(0, 170, 255);
+    ellipse(graphWidth - 15, marginY + 12, 4, 4);
+    fill(255, 136, 0);
+    ellipse(graphWidth - 15, marginY + 27, 4, 4);
+    fill(100);
+    textAlign(LEFT, CENTER);
+    text('Female', graphWidth - 10, marginY + 12);
+    text('Male', graphWidth - 10, marginY + 27);
+  }
+  if (selectedButton == 2){
+    fill(0, 170, 255);
+    ellipse(graphWidth - 15, marginY + 12, 4, 4);
+    fill(255, 136, 0);
+    ellipse(graphWidth - 15, marginY + 27, 4, 4);
+    fill(100);
+    textAlign(LEFT, CENTER);
+    text('Customer', graphWidth - 10, marginY + 12);
+    text('Subscriber', graphWidth - 10, marginY + 27);
   }
 }
