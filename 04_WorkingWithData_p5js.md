@@ -114,7 +114,6 @@ function setup(){
   print(tripTable.getColumnCount() + ' columns loaded...');
   console.log(tripTable);
   getMaxValues();
-  // noLoop(); // ** New
 }
 
 // ***** Get maximum values function ***** //
@@ -300,7 +299,7 @@ function setup(){
   print(tripTable.getColumnCount() + ' columns loaded...');
   console.log(tripTable);
   getMaxValues();
-  noLoop(); // ** New
+  noLoop();
 }
 
 // ***** Get maximum values function ***** //
@@ -356,6 +355,9 @@ function draw(){
   for (var i = 0; i < tripTable.getRowCount(); i++) {
     var thisYear = float(tripTable.getString(i, 'birth year'));
     var thisDuration = float(tripTable.getString(i, 'tripduration'));
+    if ((thisYear > maxYears) || (thisYear < minYears) || (thisDuration > maxDuration) || (thisDuration < minDuration)){
+      continue;
+    }
     var thisX = map(thisYear, minYears, maxYears, marginX, marginX + graphWidth);
     var thisY = map(thisDuration, minDuration, maxDuration, marginY + graphHeight, marginY);
     ellipse(thisX, thisY, 3, 3);

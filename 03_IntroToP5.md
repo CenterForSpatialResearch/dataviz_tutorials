@@ -361,7 +361,7 @@ function setup() {
   createCanvas(800, 450);
   background(0);
   for (var i = 0; i < 20; i++) {
-    bouncingEllipse.push(new bounce()) // Create multiple objects and add them to the array
+    bouncingEllipse.push(new bounce()); // Create multiple objects and add them to the array
   }
 }
 

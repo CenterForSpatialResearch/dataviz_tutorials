@@ -8,6 +8,9 @@ var minDuration = 5000;
 var durationRange;
 var marginX = 50;
 var marginY = 40;
+var graphHeight;
+var graphWidth;
+var tripObjects = [];
 
 // ***** Preload function ***** //
 function preload(){
@@ -25,7 +28,18 @@ function setup(){
   print(tripTable.getColumnCount() + ' columns loaded...');
   console.log(tripTable);
   getMaxValues();
-  noLoop(); // ** New
+  graphHeight = height - marginY * 2;
+  graphWidth = width - marginX * 2;
+  for (var i = 0; i < tripTable.getRowCount(); i++) {
+    var duration = float(tripTable.getString(i, 'tripduration'));
+    var usertype = tripTable.getString(i, 'usertype');
+    var birthYear = float(tripTable.getString(i, 'birth year'));
+    var gender = tripTable.getString(i, 'gender');
+    if ((birthYear > maxYears) || (birthYear < minYears) || (duration > maxDuration) || (duration < minDuration)){
+      continue;
+    }
+    tripObjects.push(new trip(duration, usertype, birthYear, gender));
+  }
 }
 
 // ***** Get maximum values function ***** //
@@ -50,10 +64,50 @@ function getMaxValues(){
   print('Duration range: ' + str(durationRange));
 }
 
+function trip(duration, usertype, yearBirth, gender){
+  // Properties
+  this.duration = duration;
+  this.usertype = usertype;
+  this.yearBirth = yearBirth;
+  this.gender = gender;
+  this.ellipseSize = 3;
+  this.positionX = map(this.yearBirth, minYears, maxYears, marginX, marginX + graphWidth);
+  this.positionY = map(this.duration, minDuration, maxDuration, marginY + graphHeight, marginY);
+
+  // Functions
+  this.drawEllipse = function() {
+    noStroke();
+    fill(0);
+    ellipse(this.positionX, this.positionY, this.ellipseSize, this.ellipseSize);
+  }
+  this.checkMouse = function() {
+    if (dist(this.positionX, this.positionY, mouseX, mouseY) < 1.5){
+      fill(255);
+      stroke(200);
+      rect(this.positionX - 75, this.positionY - 90, 150, 85);
+      noStroke();
+      fill(0);
+      textAlign(LEFT, TOP);
+      text('Trip duration: ' + str(this.duration) + ' sec', this.positionX - 68, this.positionY - 81);
+      text('User birth year: ' + str(this.yearBirth), this.positionX - 68, this.positionY - 63);
+      text('Type of user: ' + this.usertype, this.positionX - 68, this.positionY - 44);
+      var thisGender;
+      if (this.gender == '0') {
+        thisGender = 'Unknown';
+      }
+      else if (this.gender == '1') {
+        thisGender = 'Male';
+      }
+      else {
+        thisGender = 'Female';
+      }
+      text('Gender: ' + thisGender, this.positionX - 68, this.positionY - 26);
+    }
+  }
+}
+
 function draw(){
   background(255);
-  var graphHeight = height - marginY * 2;
-  var graphWidth = width - marginX * 2;
   // Draw minor axis lines
   stroke(230);
   for (var i = 0; i < 9; i++) {
@@ -68,6 +122,7 @@ function draw(){
   line(marginX, marginY, marginX, height - marginY);
   // Draw labels
   noStroke();
+  fill(0);
   for (var i = 0; i < 8; i++) {
     textAlign(CENTER, TOP);
     text(round(minYears + i * (yearRange / 7)), marginX + (graphWidth / 7) * i, marginY + graphHeight + 5);
@@ -77,12 +132,11 @@ function draw(){
     text(round(maxDuration - i * (durationRange / 9)), marginX - 5, marginY + (graphHeight / 9) * i);
   }
   // Plotting the dots
-  fill(0);
-  for (var i = 0; i < tripTable.getRowCount(); i++) {
-    var thisYear = float(tripTable.getString(i, 'birth year'));
-    var thisDuration = float(tripTable.getString(i, 'tripduration'));
-    var thisX = map(thisYear, minYears, maxYears, marginX, marginX + graphWidth);
-    var thisY = map(thisDuration, minDuration, maxDuration, marginY + graphHeight, marginY);
-    ellipse(thisX, thisY, 3, 3);
+  for (var i = 0; i < tripObjects.length; i++) {
+    tripObjects[i].drawEllipse();
+  }
+  // Checking for mouse position to display popup
+  for (var i = 0; i < tripObjects.length; i++) {
+    tripObjects[i].checkMouse();
   }
 }
