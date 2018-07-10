@@ -195,18 +195,76 @@ function drawStations(){
 The two things I would underline about the function is the use of the `floor` function and `modulus` operation to create the grid of circles. You should be seeing something like this:
 ![01_CircleGrid.png](https://github.com/CenterForSpatialResearch/dataviz_tutorials/blob/master/00_Images/06_APIs/01_CircleGrid.png)
 
+Next comes the tricky part. For every station we need to calculate the angles for the different variables and put them in sequence. Take a look at the final code for that part and I'll run over the important lines below:
+```js
+// ***** Draw stations function ***** //
+function drawStations(){
+  background(255);
+  for (var i = 0; i < stationData.data.stations.length; i++) {
+    var row = floor(i / 12);
+    var column = i%12;
+    var startAngle = 0;
+    var endAngle = 0;
+    var bikes = stationData.data.stations[i].num_bikes_available;
+    var docks = stationData.data.stations[i].num_docks_available;
+    var bikesDis = stationData.data.stations[i].num_bikes_disabled;
+    var docksDis = stationData.data.stations[i].num_docks_disabled;
+    var stationCapacity = bikes + docks + bikesDis + docksDis;
+    var stationMaxAngle = map(stationCapacity, 0, maxCapacity, 0, 360);
+    noStroke();
+    // Broken bikes
+    fill(255, 148, 0, 50);
+    endAngle = map(bikesDis, 0, stationCapacity, 0, stationMaxAngle);
+    if (startAngle != endAngle){
+      arc(marginX + circleSpacingX * column, marginY + circleSpacingY * row, circleSize, circleSize, radians(startAngle -90), radians(endAngle -90));
+    }
+    // Available bikes
+    fill(255, 148, 0, 200);
+    startAngle = endAngle;
+    endAngle = endAngle + map(bikes, 0, stationCapacity, 0, stationMaxAngle);
+    if (startAngle != endAngle){
+      arc(marginX + circleSpacingX * column, marginY + circleSpacingY * row, circleSize, circleSize, radians(startAngle -90), radians(endAngle -90));
+    }
+    // Available docks
+    fill(0, 126, 178, 150);
+    startAngle = endAngle;
+    endAngle = endAngle + map(docks, 0, stationCapacity, 0, stationMaxAngle);
+    if (startAngle != endAngle){
+      arc(marginX + circleSpacingX * column, marginY + circleSpacingY * row, circleSize, circleSize, radians(startAngle -90), radians(endAngle -90));
+    }
+    // Broken docks
+    fill(0, 126, 178, 20);
+    startAngle = endAngle;
+    endAngle = endAngle + map(docksDis, 0, stationCapacity, 0, stationMaxAngle);
+    if (startAngle != endAngle){
+      arc(marginX + circleSpacingX * column, marginY + circleSpacingY * row, circleSize, circleSize, radians(startAngle -90), radians(endAngle -90));
+    }
+    stroke(230);
+    fill(255);
+    ellipse(marginX + circleSpacingX * column, marginY + circleSpacingY * row, circleSize/2, circleSize/2);
+    noFill();
+    ellipse(marginX + circleSpacingX * column, marginY + circleSpacingY * row, circleSize, circleSize);
+  }
+}
+```
+* First, I get all the variables that I need for each station.
+* Second, I calculate the maximum angle for each station based on the station with the maximum capacity. I use the `map` function for this and I return a number between `0` and `360` (I start working in degrees).
+* Third, I calculate the start angle and end angle for the broken bikes variable. If both are equal (no broken bikes) then I skip this. If they are not equal, then I draw an `arc` and I use the start and end angles, but convert them to `radians` because that's the type of unit the `arc` function takes.
+* I do the same for all the other variables, making sure to add the last end angle to the next start angle and so on.
+* Finally, I draw two circles, an interior one to transform this into a donut chart and not a pie chart, and an exterior one for the outer stroke.
+
+You should get something like this:
+![02_ColorCircles.png](https://github.com/CenterForSpatialResearch/dataviz_tutorials/blob/master/00_Images/06_APIs/02_ColorCircles.png)
 
 
-Link to Daniel Shiffman's youtube tutorial.
 
 
-Capacity
-Bikes available
-Docks available
-Bikes disabled
-Docks disabled
 
-Loop through them, get max size of station. That's the full circle.
+
+
+Link to Dan Shiffman's youtube tutorial.
+
+
 
 
 
