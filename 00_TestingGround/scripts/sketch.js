@@ -7,6 +7,7 @@ var marginY = 50;
 var circleSpacingX = 90;
 var circleSpacingY = 90;
 var circleSize = 60;
+var button;
 
 // ***** Setup function ***** //
 function setup(){
@@ -15,6 +16,8 @@ function setup(){
   textFont('Roboto');
   console.log('Setup complete...');
   queryAPI();
+  button = select('#refresh');
+  button.mousePressed(queryAPI)
   noLoop();
 }
 
@@ -37,11 +40,11 @@ function getStationData(apiData){
     maxCapacity = max(maxCapacity, stationCapacity);
   }
   drawStations();
+  print('Queried the API...');
 }
 
 // ***** Draw stations function ***** //
 function drawStations(){
-  // print(radians(-90));
   background(255);
   for (var i = 0; i < stationData.data.stations.length; i++) {
     var row = floor(i / 12);
